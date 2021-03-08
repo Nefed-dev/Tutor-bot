@@ -1,7 +1,8 @@
 import sqlite3
 
+
 class Database:
-    def __init__(self, path_to_db='users.db'):
+    def __init__(self, path_to_db):
         self.path_to_db = path_to_db
 
     @property
@@ -9,10 +10,7 @@ class Database:
         return sqlite3.connect(self.path_to_db)
 
     def execute(self, sql: str,
-                parameters: tuple = None, 
-                fetchone=False,
-                fetchall=False,
-                commit=False):
+                parameters: tuple = None, fetchone=False, fetchall=False, commit=False):
         if not parameters:
             parameters = ()
         connection = self.connection
@@ -34,10 +32,10 @@ class Database:
             CREATE TABLE Users (
                 id int NOT NULL,
                 Name varchar(255) NOT NULL,
-                phone int NOT NULL,
+                phone varchar(12),
                 PRIMARY KEY (id)
                 );
-        """
+                """
         self.execute(sql, commit=True)
 
     @staticmethod
@@ -76,6 +74,13 @@ class Database:
 
     def delete_users(self):
         self.execute("DELETE FROM Users WHERE TRUE", commit=True)
+
+
+    def update_phone_number(self, phone, id):
+        sql = f"""
+        UPDATE Users SET phone=? WHERE id=?
+        """
+        return self.execute(sql, parameters=(phone, id), commit=True)
 
 
 def logger(statement):
