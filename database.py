@@ -64,7 +64,7 @@ class Database:
 
     def select_all_users(self):
         """Выбор всех пользователей"""
-        sql = """SELECT FROM * Users"""
+        sql = """SELECT * FROM Users"""
         return self.execute(sql, fetchall=True)
 
     def select_user(self, **kwargs):
@@ -86,6 +86,13 @@ class Database:
         """
 
         return self.execute(sql, parameters=(phone, id), commit=True)
+
+    def check_phone(self, id):
+        sql = f"""
+        SELECT phone FROM Users WHERE id=?
+        """
+
+        return self.execute(sql, parameters=id, fetchone=True)
 
     def delete_user(self):
         """Удаление пользователя из БД"""
