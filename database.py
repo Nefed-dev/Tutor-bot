@@ -36,7 +36,7 @@ class Database:
         """Создание таблицы: id, fullname(tg), phone_number"""
         """В дальнейшем необходимо добавить в таблицу желание записаться на курс/интенсив"""
         sql = """
-        CREATE TABLE Users (
+        CREATE TABLE IF NOT EXISTS Users (
         id int NOT NULL,
         fullname varchar(255) NOT NULL, 
         phone varchar(12),
@@ -91,8 +91,7 @@ class Database:
         sql = f"""
         SELECT phone FROM Users WHERE id=?
         """
-
-        return self.execute(sql, parameters=id, fetchone=True)
+        return self.execute(sql, parameters=(id,), fetchone=True)
 
     def delete_user(self):
         """Удаление пользователя из БД"""

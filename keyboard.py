@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
 """Основная клавиатура с предложением услуг"""
 check_list_kb = ReplyKeyboardMarkup(resize_keyboard=True,
@@ -12,7 +12,21 @@ check_list_kb = ReplyKeyboardMarkup(resize_keyboard=True,
 phone_kb = ReplyKeyboardMarkup(resize_keyboard=True,
                                keyboard=[
                                    [
-                                       KeyboardButton(text="📱",
+                                       KeyboardButton(text="Пройти регистрацию в боте 📱",
                                                       request_contact=True)
                                    ]
                                ])
+main_keyboard = ReplyKeyboardMarkup(resize_keyboard=True,
+                                    keyboard=[
+                                        [KeyboardButton(text='Хочу чек-лист')],
+                                        [KeyboardButton(text='Хочу на вебинар')],
+                                        [KeyboardButton(text='Интенсив ОГЭ')]
+
+                                    ])
+
+vebinar_keyboard = ReplyKeyboardMarkup(resize_keyboard=True,
+                                       keyboard=[
+                                           [KeyboardButton(text='Вебинар ОГЭ')],
+                                           [KeyboardButton(text='Вебинар ЕГЭ')],
+                                           [KeyboardButton(text='Назад')]
+                                       ])
