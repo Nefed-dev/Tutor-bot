@@ -28,5 +28,5 @@ vebinar_keyboard = ReplyKeyboardMarkup(resize_keyboard=True,
                                        keyboard=[
                                            [KeyboardButton(text='Вебинар ОГЭ')],
                                            [KeyboardButton(text='Вебинар ЕГЭ')],
-                                           [KeyboardButton(text='Назад')]
+                                           [KeyboardButton(text='⏪Назад⏪')]
                                        ])

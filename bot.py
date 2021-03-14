@@ -11,6 +11,8 @@ dp = Dispatcher(bot)
 db = Database(path_to_db='users.db')
 
 CHECK_LIST_LINK = 'https://drive.google.com/file/d/1Q48SJJM4GYQGx22JKBUinBk3HBfnD0my/view?usp=sharing'
+EGE_CHAT_LINK = 'https://t.me/joinchat/WBHiBNDvLwKIDc6T'
+OGE_CHAT_LINK = 'https://t.me/joinchat/H8rY12S3o_HvJeuM'
 
 
 @dp.message_handler(Command('start'))
@@ -53,16 +55,16 @@ async def registration(message: types.Message):
                          reply_markup=kb.main_keyboard)
 
     user_info = db.select_user(id=message.from_user.id)
+    # user_info = (id, name, phone)
 
-    await dp.bot.send_message(chat_id=335825375, text=f"Новый зарегистрированный в Dema Fizmat: \n{user_info}, phone=={user_phone}")
+    await dp.bot.send_message(chat_id=335825375, text=f"Новый зарегистрированный в Dema Fizmat: \n"
+                                                      f"ID = {user_info[0]}\n"
+                                                      f"Имя = {user_info[1]}, \n"
+                                                      f"phone = {user_info[2]}")
 
 
 @dp.message_handler()
 async def message_answer(message: types.Message):
-    # user_info = db.select_user(id=message.from_user.id)
-    #
-    # await dp.bot.send_message(chat_id=335825375, text=f"Новый зарегистрированный в Dema Fizmat: \n{user_info}")
-
     if message.text == 'Хочу чек-лист':
         await message.answer(text=f'Держи. Чек лист находится по ссылке :)\n'
                                   f'{CHECK_LIST_LINK}')
@@ -73,15 +75,15 @@ async def message_answer(message: types.Message):
         await message.answer(
             text='Скоро будет что-то интересное! \n'
                  'Следи за инстой, также я пришлю информацию через бота')
-    elif message.text == 'Назад':
+    elif message.text == '⏪Назад⏪':
         await message.answer(text='Нажми на одну из предложенных ниже кнопок и ты полчишь своё!',
                              reply_markup=kb.main_keyboard)
     elif message.text == 'Вебинар ОГЭ':
-        await message.answer(text='Просто перейди по ссылке и ты попадешь в чат по вебинару\n'
-                                  'https://t.me/joinchat/H8rY12S3o_HvJeuM')
+        await message.answer(text=f'Просто перейди по ссылке и ты попадешь в чат по вебинару\n'
+                                  f'{OGE_CHAT_LINK}')
     elif message.text == 'Вебинар ЕГЭ':
-        await message.answer(text='Просто перейди по ссылке и ты попадешь в чат по вебинару ЕГЭ\n'
-                                  'https://t.me/joinchat/WBHiBNDvLwKIDc6T')
+        await message.answer(text=f'Просто перейди по ссылке и ты попадешь в чат по вебинару ЕГЭ\n'
+                                  f'{EGE_CHAT_LINK}')
     elif message.text == 'Интенсив ОГЭ':
         await message.answer(text='Привет, я готовлю бомбовый интенсив по подготовке к ОГЭ, '
                                   'где ты за 20 часов научишься писать ОГЭ на стабильную четверку, '
