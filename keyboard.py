@@ -20,7 +20,7 @@ main_keyboard = ReplyKeyboardMarkup(resize_keyboard=True,
                                     keyboard=[
                                         [KeyboardButton(text='Хочу чек-лист')],
                                         [KeyboardButton(text='Хочу на вебинар')],
-                                        [KeyboardButton(text='Интенсив ОГЭ')]
+                                        #[KeyboardButton(text='Интенсив ОГЭ')]
 
                                     ])
 
