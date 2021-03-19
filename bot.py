@@ -21,7 +21,9 @@ async def set_default_commands(dp):
 
 
 def return_all_user():
-    all_user = 'Список всех зарегистрированных: \n' \
+
+    all_user = f'Всего в базе {db.count_users()[0]} человек.\n' \
+               'Список всех зарегистрированных: \n' \
                'CHAT_ID - ИМЯ - НОМЕР ТЕЛЕФОНА\n'
     for user in db.select_all_users():
         all_user += f"{user[0]} - {user[1]} - {user[2]}\n"
@@ -50,7 +52,7 @@ async def hello_message(message: types.Message):
                          reply_markup=kb.phone_kb)
 
 
-@dp.message_handler(Command('db_in_chat', prefixes='!'))
+@dp.message_handler(Command('dbinchat', prefixes='!'))
 async def admin_db_in_chat(message: types.Message):
     user_id = message.from_user.id
     if user_id in ADMIN_ID:
@@ -58,7 +60,7 @@ async def admin_db_in_chat(message: types.Message):
         await message.answer(text=f'{all_user}')
 
 
-@dp.message_handler(Command('db_download', prefixes='!'))
+@dp.message_handler(Command('dbdownload', prefixes='!'))
 async def admin_db_download(message: types.Message):
     user_id = message.from_user.id
     if user_id in ADMIN_ID:
